@@ -31,6 +31,7 @@
      </header>
      
    <main class="wrapper">
+    <p>The following is an example of how we can process a user's input to change a webpage using JavaScript. It reads a number input into the text box below upon submission, and then replaces the input form with a response which indicates whether or not the number is even or odd.</p>
  
     <h2 class="subheader">Place form code below:</h2>
     <div id="output"></div>
@@ -56,17 +57,29 @@
   <script src="js/main.js"></script>   
   <script>
     const queryString = window.location.search;
+    let myOutput = `<div id="container">`; // will store data for display
     const urlParams = new URLSearchParams(queryString);
+
     
-    if(queryString.length > 0){//form submitted!
-     let myOutput = `<div id="container">`;//will store data for display
-       //alert("Data submitted!");
-       if(urlParams.has("input")){
-           //alert(urlParams.get("input"));
+    function getEven(num) {
+      return num % 2 == 0;
+    };
+    
+      if (queryString.length > 0) {//form submitted!
+      let myOutput = `<div id="container">`;//will store data for display
+      //alert("Data submitted!");
+      if (urlParams.has("input")) {
+        //alert(urlParams.get("input"));
 
-           let myInput = urlParams.get("input");
+        let myInput = urlParams.get("input");
 
-           myOutput += `<p>You input ${myInput}</p>`;
+        if (getEven(myInput)) {//even output
+          myOutput += `<p>You input <b>${myInput}</b> and the number is even</p>`;
+        } else {//odd output
+          myOutput += `<p>You input <b>${myInput}</b> and the number is odd</p>`;
+
+        }
+
        }
         myOutput += `<p><a href="index.html">CLEAR</a></p>`; 
         myOutput += `</div>`;
